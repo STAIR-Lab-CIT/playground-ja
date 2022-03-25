@@ -73,21 +73,36 @@ let INPUTS: {[name: string]: InputFeature} = {
 };
 
 let HIDABLE_CONTROLS = [
-  ["Show test data", "showTestData"],
-  ["Discretize output", "discretize"],
-  ["Play button", "playButton"],
-  ["Step button", "stepButton"],
-  ["Reset button", "resetButton"],
-  ["Learning rate", "learningRate"],
-  ["Activation", "activation"],
-  ["Regularization", "regularization"],
-  ["Regularization rate", "regularizationRate"],
-  ["Problem type", "problem"],
-  ["Which dataset", "dataset"],
-  ["Ratio train data", "percTrainData"],
-  ["Noise level", "noise"],
-  ["Batch size", "batchSize"],
-  ["# of hidden layers", "numHiddenLayers"],
+  ["テストデータ表示", "showTestData"],
+  ["出力離散化", "discretize"],
+  ["実行ボタン", "playButton"],
+  ["ステップボタン", "stepButton"],
+  ["リセットボタン", "resetButton"],
+  ["学習率", "learningRate"],
+  ["活性化関数", "activation"],
+  ["正則化", "regularization"],
+  ["正則化率", "regularizationRate"],
+  ["問題の種類", "problem"],
+  ["データセット選択", "dataset"],
+  ["訓練データ比率", "percTrainData"],
+  ["ノイズレベル", "noise"],
+  ["バッチサイズ", "batchSize"],
+  ["隠れ層の数", "numHiddenLayers"],
+//  ["Show test data", "showTestData"],
+//  ["Discretize output", "discretize"],
+//  ["Play button", "playButton"],
+//  ["Step button", "stepButton"],
+//  ["Reset button", "resetButton"],
+//  ["Learning rate", "learningRate"],
+//  ["Activation", "activation"],
+//  ["Regularization", "regularization"],
+//  ["Regularization rate", "regularizationRate"],
+//  ["Problem type", "problem"],
+//  ["Which dataset", "dataset"],
+//  ["Ratio train data", "percTrainData"],
+//  ["Noise level", "noise"],
+//  ["Batch size", "batchSize"],
+//  ["# of hidden layers", "numHiddenLayers"],
 ];
 
 class Player {
@@ -696,9 +711,10 @@ function addPlusMinusControl(x: number, layerIdx: number) {
       .attr("class", "material-icons")
       .text("remove");
 
-  let suffix = state.networkShape[i] > 1 ? "s" : "";
+  // let suffix = state.networkShape[i] > 1 ? "s" : "";
   div.append("div").text(
-    state.networkShape[i] + " neuron" + suffix
+    state.networkShape[i] + " ニューロン"
+    // state.networkShape[i] + " neuron" + suffix
   );
 }
 
@@ -734,7 +750,8 @@ function updateHoverCard(type: HoverType, nodeOrLink?: nn.Node | nn.Link,
   let value = (type === HoverType.WEIGHT) ?
     (nodeOrLink as nn.Link).weight :
     (nodeOrLink as nn.Node).bias;
-  let name = (type === HoverType.WEIGHT) ? "Weight" : "Bias";
+  // let name = (type === HoverType.WEIGHT) ? "Weight" : "Bias";
+  let name = (type === HoverType.WEIGHT) ? "重み" : "バイアス項";
   hovercard.style({
     "left": `${coordinates[0] + 20}px`,
     "top": `${coordinates[1]}px`,
@@ -945,8 +962,9 @@ function reset(onStartup=false) {
   }
   player.pause();
 
-  let suffix = state.numHiddenLayers !== 1 ? "s" : "";
-  d3.select("#layers-label").text("Hidden layer" + suffix);
+  d3.select("#layers-label").text("隠れ層の数");
+  //let suffix = state.numHiddenLayers !== 1 ? "s" : "";
+  //d3.select("#layers-label").text("Hidden layer" + suffix);
   d3.select("#num-layers").text(state.numHiddenLayers);
 
   // Make a simple network.
