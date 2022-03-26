@@ -764,7 +764,8 @@ g.column rect {
 }
 
 .hidden-layers #layers-label {
-  width: 125px;
+  width: 95px; 
+/*  width: 125px; */
   display: inline-block;
 }
 
